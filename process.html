@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License. 
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+   <!--
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            This file is generated from XML source: DO NOT EDIT!
+      XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<link rel="stylesheet" href="/style/compressed.css" type="text/css" media="screen, projection"/>
+	<link rel="stylesheet" href="/style/style.css" type="text/css" media="screen, projection"/>
+	<link rel="stylesheet" href="/style/attic.css" type="text/css" media="screen, projection"/>
+	<!--[if IE]><link rel="stylesheet" href="/style/ie.css" type="text/css" media="screen, projection"/><![endif]-->
+     <meta name="author" content="The Apache Software Foundation" /><meta name="email" content="general.AT.attic.apache.DOT.org" />
+    <title>Moving a project to the Attic - Apache Attic</title>
+  
+ </head>
+ <body id="sub">
+	<div class="container">
+	<hr class="space col"/>
+	<div class="block">
+		<div class="column span-24">
+      <div id="header">
+                          <!-- Add 'default' header section here. -->
+                                <h1>Moving a project to the Attic</h1>
+                         </div>
+      </div>
+	</div>
+	<hr/>
+	<div class="block content">
+		<div class="column span-15 colborder">
+                            
+<div class="section-content">
+<p>At some point a project will vote to join the Attic. The following defines a process 
+     to move that project into the Attic and gently close it down. </p>
+<ol>
+    <li>A Project PMC decides to move to the Attic. 
+      <ul>
+        <li>Conduct a discussion on whether to dissolve the PMC and move the project to the Attic on the public dev list. Do not conduct it on the private PMC list. </li>
+        <li>Consider an appeal to the user list for interested users to provide their interest in helping out more. </li>
+        <li>Conduct a PMC vote on the public dev list. </li>
+        <li>If the PMC votes to dissolve the PMC and move the project to the Attic, inform the board of the successful vote (linking or forwarding the 'successful' vote) and add a <a href="resolution.html">resolution</a> to dissolve the PMC to the next board meeting agenda. </li>
+        <li>If the PMC can't get enough people to vote to dissolve the PMC (and there are not three -1 votes), then that is grounds for moving the project to the Attic. They should inform the board as above, noting that the vote failed to get enough votes. </li>
+      </ul>
+    </li>
+    <li>If the board approve the resolution, open a JIRA item - 'Move ${project} to the Attic'.<br /> Copy/paste the following items to the details (see "How to" below for a description of each step): 
+      <ol type="1">
+        <li>Confirm Board Resolution (if TLP)</li>
+        <li>Delete from committee-info.txt (if TLP)</li>
+        <li>Remove VP entry on <a href="http://www.apache.org/foundation/">http://www.apache.org/foundation/</a> (if TLP)</li>
+        <li>Inform users of the move to the Attic</li>
+        <li>Create project page on Attic site: http://attic.apache.org/projects/${project}.html</li>
+        <li>Obtain source control karma and point source control mails to general at attic
+          <ul>
+            <li>i. Update the project DOAP file (if any): https://projects.apache.org/project.html?${project}</li>
+            <li>ii. Make source control read-only</li></ul></li>
+        <li>Move committee's PMC data file to retired (if TLP)</li>
+        <li>Remove from <a href="http://www.apache.org/#projects-list">http://www.apache.org/#projects-list</a> navigation (if TLP)</li>
+        <li>Announce on <a href="http://mail-archives.apache.org/mod_mbox/www-announce/">announce at apache.org</a></li>
+      </ol>
+    </li>
+    <li>Open an <a href="https://issues.apache.org/jira/browse/INFRA">Infrastructure JIRA</a> issue identifying the resources that need turning off/making read only. Typically:
+      <ul>
+        <li>Remove files from <a href="http://www.apache.org/dist/">www.apache.org/dist</a></li>
+        <li>Closing down of dev@, commits@ and private@ <a href="http://mail-archives.apache.org/mod_mbox/">mailing lists</a></li>
+        <li>Close down the user mailing list (unless still active - in which case propose a moderator to Infra)</li>
+        <li>Make JIRA|Bugzilla read-only</li>
+        <li>Make the wiki (Confluence|Moinmoin) read-only</li>
+        <li>Delete unix/ldap group</li>
+        <li>Turn off automated builds</li>
+      </ul>
+    </li>
+  </ol>
+</div>
+                 
+<h4 id="General-pointers">
+   How to: General pointers
+</h4>
+<div class="section-content">
+<p>The following are usefull svn/https locations:
+    <ul>
+     <li>svn site <a href="http://svn.apache.org/viewvc/attic">http://svn.apache.org/repos/asf/attic</a>: sources in <code>xdocs</code>, generated html in <code>docs</code></li>
+     <li>site <a href="http://attic.apache.org">http://attic.apache.org</a></li>
+     <li>internals: <a href="https://ci.apache.org/builders/attic-site">Buildbot job</a> to build from source and commit generated html,
+         <a href="https://github.com/apache/infrastructure-puppet/blob/deployment/modules/svnwcsub/files/svnwcsub.conf#L36">svnwcsub configuration</a> to update generated html from svn to webserver</li>
+     <li>jira <a href="https://issues.apache.org/jira/browse/ATTIC">https://issues.apache.org/jira/browse/ATTIC</a></li>
+     <li>committees.xml <a href="https://svn.apache.org/repos/asf/comdev/projects.apache.org/data/committees.xml">https://svn.apache.org/repos/asf/comdev/projects.apache.org/data/committees.xml</a></li>
+    </ul>
+  </p>
+</div>
+                 
+<h4 id="confirm-resolution">
+   How to: 1. Confirm Board Resolution (if TLP)
+</h4>
+<div class="section-content">
+<p>Check previous Board minutes (in SVN or to committers@) to confirm project was retired.</p>
+</div>
+                 
+<h4 id="delete-pmc">
+   How to: 2. Delete from committee-info.txt  (if TLP)
+</h4>
+<div class="section-content">
+<p>Remove the PMC from <a href="https://svn.apache.org/repos/private/committers/board/committee-info.txt">https://svn.apache.org/repos/private/committers/board/committee-info.txt</a></p>
+</div>
+                 
+<h4 id="update-foundation-site">
+   How to: 3. Remove VP entry on http://www.apache.org/foundation/
+</h4>
+<div class="section-content">
+<p>Access the CMS <a href="https://cms.apache.org/redirect?uri=http://www.apache.org/foundation/">here</a> 
+  and update the text. </p>
+<p>Check if the outgoing PMC chair is not chair of any other PMCs, then ask infra to adjust the 'pmc-chairs' LDAP group accordingly.</p>
+</div>
+                 
+<h4 id="informing">
+   How to: 4. Inform users of the move to the Attic
+</h4>
+<div class="section-content">
+<p>Let the users know that the project is moving into the Attic. Use the following template: </p>
+<pre>
+A heads up for the ${project} user community that the ${project} project has 
+been 'moved to the Attic'. This means that the ${project} developers (more 
+formally its Project Management Committee) have voted to retire ${project} 
+and move the responsibility for its oversight over to the Attic project.
+
+Loosely speaking this means that the projects resources will be moved to a 
+read-only state.
+
+You can read more about the Apache Attic and the process of moving to the 
+Attic at http://attic.apache.org.
+
+You can follow this process in JIRA: 
+ 
+  https://issues.apache.org/jira/browse/ATTIC-${#}
+
+Thanks,
+
+${Name} on behalf of ${project} + the Attic.
+  </pre>
+<p>Remember to subscribe to the user list <a href="https://whimsy.apache.org/committers/subscribe">https://whimsy.apache.org/committers/subscribe</a> to avoid moderation. Also bear in mind that the user mailing list may 
+     already know and you can skip this stage. Make sure you read that thread if it does exist. </p>
+</div>
+                 
+<h4 id="atticsite">
+   How to: 5. Create project page on Attic site: http://attic.apache.org/projects/${project}.html
+</h4>
+<div class="section-content">
+<p>The Attic website is built using Anakia. Anakia is an old site technology built on top of Apache Velocity. 
+     You can get the source for the site from Subversion: </p>
+<pre>svn co https://svn.apache.org/repos/asf/attic/site</pre>
+<p>Signal that <i>retired</i> banners must be added to ${project}.a.o. :</p>
+<ul>
+    <li><code>mkdir xdocs/flagged/${project}.apache.org ;</code></li>
+    <li><code>touch xdocs/flagged/${project}.apache.org/${project}.apache.org</code></li>
+  </ul>
+<p>To create a project page do:</p>
+<ul>
+    <li>in xdocs/projects/ copy one of the files to the new project name (eg. devicemap.xml)</li>
+    <li>TBA: how to determine the file name</li>
+    <li>Add the new file as a link in the xdocs/stylesheets/project.xml navigation</li>
+    <li>Run 'ant' from the root (ie: the attic/site/ directory you checked out)</li>
+    <li>Review the generated files in docs/** in your browser</li>
+    <li>SVN commit *all* changes. Remember to add both the new xdocs/ project file and the new generated docs/ project file
+    </li>
+    <li>The new pages should go live quickly</li>
+  </ul>
+<p>To make minor edits to existing pages:</p>
+<ul>
+    <li>edit the page(s)</li>
+    <li>Commit the updated pages</li>
+    <li>The buildbot will build the site and commit the result which will be published soon after</li>
+    <li>This is most suitable for minor changes when there is no need to review the output before committing.
+    Otherwise use the process described previously.
+    </li>
+  </ul>
+</div>
+                 
+<h4 id="svnkarma">
+   How to: 6. Obtain source control karma and point source control mails to general at attic
+</h4>
+<div class="section-content">
+<p>follow the workflow <a href="https://cwiki.apache.org/confluence/display/INFRA/Git+workflow+for+infrastructure-puppet+repo">https://cwiki.apache.org/confluence/display/INFRA/Git+workflow+for+infrastructure-puppet+repo</a>,<br />
+sometimes it helps chatting with infra <a href="https://www.hipchat.com/gIjVtYcNy">https://www.hipchat.com/gIjVtYcNy</a>,<br />
+all work are done in "{infra-repo}/modules/subversion_server/files/authorization/"</p>
+<ul>
+        <li>Change "asf-authorization-template" so that the attic-pmc has karma instead of the defunct project. </li>
+        <li>Change "asf-mailer.conf" so that the attic-pmc has karma instead of the defunct project. Add project to attic regex, and if there are a project entry remove it</li>
+    </ul>
+</div>
+                 
+<h4 id="doap">
+   How to: 6.ii Update the project DOAP file (if any): https://projects.apache.org/project.html?${project}
+</h4>
+<div class="section-content">
+<p>The files referenced are in <a href="https://svn.apache.org/repos/asf/comdev">https://svn.apache.org/repos/asf/comdev</a></p>
+<p>Identify whether the project has a DOAP file (see the &lt;comdev repo&gt;/projects.apache.org/data/projects.xml file if update the rdf file with PMC to the Attic and add a category of <em>retired</em>: </p>
+<pre>pmc change:    &lt;asfext:pmc rdf:resource="http://attic.apache.org" /&gt;
+new category:  &lt;category rdf:resource="http://projects.apache.org/category/retired" /&gt;</pre>
+</div>
+                 
+<h4 id="PMCdata">
+   How to: 7. Move committee's PMC data file to retired (if TLP)
+</h4>
+<div class="section-content">
+<p>If committee appears in <a href="https://projects.apache.org/committees.html">committees list</a>, moving data to retired will remove it from the list.
+       Notice that <a href="https://issues.apache.org/jira/browse/COMDEV-182">this task is being automated</a>, then not necessary to track any more in the future...</p>
+<p>Comment PMC data files index entry (see the <a href="https://svn.apache.org/repos/asf/comdev/projects.apache.org/data/committees.xml">committees.xml</a> file
+       and old <a href="https://svn.apache.org/repos/asf/infrastructure/site-tools/trunk/projects/pmc_list.xml">pmc_list.xml</a> file) and move PMC data file
+       from <a href="https://svn.apache.org/repos/asf/comdev/projects.apache.org/data/committees">committees/</a> directory
+       to <a href="https://svn.apache.org/repos/asf/comdev/projects.apache.org/data/committees-retired">committees-retired/</a>.
+    </p>
+</div>
+                 
+<h4 id="www.apache">
+   How to: 8. Remove from http://www.apache.org/#projects-list navigation (if TLP)
+</h4>
+<div class="section-content">
+<p>As a retired project, a <a href="http://www.apache.org/#projects-list">link on the front page of Apache site</a> is no longer necessary. Remove the link and regenerate the main Apache site. 
+     This is done via the <code>trunk/templates/blocks/projects.mdtext</code> of the <a href="https://cms.apache.org/redirect?uri=http://www.apache.org/index.html">www.apache.org CMS</a>. </p>
+<p>It's also worth checking that the VP link from <a href="http://www.apache.org/foundation/">http://www.apache.org/foundation/</a> has been removed. </p>
+</div>
+                 
+<h4 id="announce">
+   How to: 9. Announce on announce@apache.org
+</h4>
+<div class="section-content">
+<p>Announce that the project is now retired. Consider the following template. </p>
+<pre>
+Announcing that the Apache ${project} committers have voted to retire
+the project due to inactivity. ${project} was {boilerplate}.
+
+Retiring a project is not as simple as turning everything off, as
+existing users need to both know that the project is retiring and
+retain access to the necessary information for their own development
+efforts.
+
+You can read more about ${project}'s retirement at:
+
+   http://attic.apache.org/projects/${project}.html
+
+The user mailing list remains open, while the rest of the project's
+resources will continue to be available in a read-only state -
+website, wikis, svn, downloads and bug tracker with no change in url.
+
+Providing process and solutions to make it clear when an Apache
+project has reached its end of life is the role of the Apache Attic,
+and you can read more about that at:
+
+   http://attic.apache.org/
+
+Thanks,
+
+${NAME}
+on behalf of the Apache Attic and the now retired Apache ${project} project
+  </pre>
+<p>It's important to include the boilerplate from the project's site so people 
+     know what we're talking about. </p>
+</div>
+         </div>
+    <div class="column span-8 last">
+      <div class="block">
+        <div class="nav column span-11">
+          <div>
+               <div class="menuheader">The Apache Attic</div>
+  <ul>
+          <li><a href="/">Home</a></li> 
+          <li><a href="/process.html">Process</a></li> 
+          <li><a href="http://issues.apache.org/jira/browse/ATTIC">Process tracking</a></li> 
+          <li><a href="https://whimsy.apache.org/board/minutes/Attic.html">Board Minutes</a></li> 
+          <li><a href="http://www.apache.org/licenses/">License</a></li> 
+          <li><a href="http://www.apache.org/security/">Security</a></li> 
+      </ul>
+      <div class="menuheader">Related Apache Links</div>
+  <ul>
+          <li><a href="http://www.apache.org/">Foundation</a></li> 
+          <li><a href="http://www.apache.org/foundation/sponsorship.html">Donate</a></li> 
+          <li><a href="http://www.apache.org/foundation/thanks.html">Thanks</a></li> 
+          <li><a href="http://incubator.apache.org/">Incubator</a></li> 
+          <li><a href="http://apachecon.com/">ApacheCon</a></li> 
+      </ul>
+          </div>
+        </div>
+        <div class="nav column prepend-1 span-12 last">
+               <h6>Projects in the Attic</h6>
+  <ul>
+          <li><a href="/projects/abdera.html">Abdera</a></li> 
+          <li><a href="/projects/ace.html">ACE</a></li> 
+          <li><a href="/projects/avalon.html">Avalon</a></li> 
+          <li><a href="/projects/axkit.html">AxKit</a></li> 
+          <li><a href="/projects/axis-sandesha-c.html">Axis Sandesha2/C</a></li> 
+          <li><a href="/projects/axis-savan-c.html">Axis Savan/C</a></li> 
+          <li><a href="/projects/axis-savan-java.html">Axis Savan/Java</a></li> 
+          <li><a href="/projects/beehive.html">Beehive</a></li> 
+          <li><a href="/projects/click.html">Click</a></li> 
+          <li><a href="/projects/crimson.html">Crimson</a></li> 
+          <li><a href="/projects/continuum.html">Continuum</a></li> 
+          <li><a href="/projects/deltacloud.html">Deltacloud</a></li> 
+          <li><a href="/projects/devicemap.html">DeviceMap</a></li> 
+          <li><a href="/projects/directmemory.html">DirectMemory</a></li> 
+          <li><a href="/projects/esme.html">ESME</a></li> 
+          <li><a href="/projects/etch.html">Etch</a></li> 
+          <li><a href="/projects/excalibur.html">Excalibur</a></li> 
+          <li><a href="/projects/harmony.html">Harmony</a></li> 
+          <li><a href="/projects/hivemind.html">HiveMind</a></li> 
+          <li><a href="/projects/ibatis.html">iBATIS</a></li> 
+          <li><a href="/projects/jakarta.html">Jakarta</a></li> 
+          <li><a href="/projects/jakarta-cactus.html">Jakarta Cactus</a></li> 
+          <li><a href="/projects/jakarta-ecs.html">Jakarta ECS</a></li> 
+          <li><a href="/projects/jakarta-oro.html">Jakarta ORO</a></li> 
+          <li><a href="/projects/jakarta-regexp.html">Jakarta Regexp</a></li> 
+          <li><a href="/projects/jakarta-slide.html">Jakarta Slide</a></li> 
+          <li><a href="/projects/jakarta-taglibs.html">Jakarta Taglibs</a></li> 
+          <li><a href="/projects/lenya.html">Lenya</a></li> 
+          <li><a href="/projects/mrunit.html">MRUnit</a></li> 
+          <li><a href="/projects/ojb.html">ObJectRelationalBridge (OJB)</a></li> 
+          <li><a href="/projects/oltu.html">Oltu</a></li> 
+          <li><a href="/projects/onami.html">Onami</a></li> 
+          <li><a href="/projects/quetzalcoatl.html">Quetzalcoatl</a></li> 
+          <li><a href="/projects/rave.html">Rave</a></li> 
+          <li><a href="/projects/shale.html">Shale</a></li> 
+          <li><a href="/projects/shindig.html">Shindig</a></li> 
+          <li><a href="/projects/stdcxx.html">Standard C++ Library (STDCXX)</a></li> 
+          <li><a href="/projects/stratos.html">Stratos</a></li> 
+          <li><a href="/projects/tuscany.html">Tuscany</a></li> 
+          <li><a href="/projects/whirr.html">Whirr</a></li> 
+          <li><a href="/projects/wink.html">Wink</a></li> 
+          <li><a href="/projects/wookie.html">Wookie</a></li> 
+          <li><a href="/projects/muse.html">WS Muse</a></li> 
+          <li><a href="/projects/xang.html">Xang</a></li> 
+          <li><a href="/projects/xindice.html">Xindice</a></li> 
+          <li><a href="/projects/xmlbeans.html">XMLBeans</a></li> 
+          <li><a href="/projects/xml.html">XML</a></li> 
+      </ul>
+        </div>
+      </div>
+    </div>
+    <div class="column span-24 footer">
+      <hr/>
+        <p>Copyright &#169; 2009-2018 The Apache Software Foundation, Licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.<br/>
+        Apache and the Apache feather logo are trademarks of The Apache Software Foundation.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
