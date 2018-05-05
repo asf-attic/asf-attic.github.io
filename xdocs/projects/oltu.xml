@@ -22,6 +22,9 @@
     <author email="general.AT.attic.apache.DOT.org">The Apache Software Foundation</author>
     <title>Apache Oltu</title>
   </properties>
+<!--
+retired flag: oltu
+-->
 <body>
 
 <section id="oltu">
